@@ -12,7 +12,7 @@ The problem of a developer is that you have to develop small snippets again and 
 
 ## Getting Started
 
-You only have to integrate the C# project into your development environment.
+You only have to integrate the C# project into your development environment and must add it as reference .
 
 
 ## Built With
