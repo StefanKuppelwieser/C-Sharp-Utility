@@ -1,4 +1,4 @@
-# C# Util
+# C# Utility
 <a href="https://opensource.org/licenses/MIT">
   <img src="https://img.shields.io/badge/License-MIT-red.svg"
       alt="MIT">
