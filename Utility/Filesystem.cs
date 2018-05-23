@@ -10,16 +10,8 @@ namespace Utility
     /// <summary>
     /// The class includes utility functions concerning the file system
     /// </summary>
-    public static class Fileystem
+    public static class Filesystem
     {
-
-        /// <summary>
-        /// The main function was just created so that you can compile the project
-        /// </summary>
-        static void Main(string[] args)
-        {
-
-        }
 
         /// <summary>
         /// The function merges the current path with a file name
@@ -29,7 +21,7 @@ namespace Utility
         /// method from a wireless device.
         /// <code>
         /// 
-        ///string path = concatenatedPathWithFile(@"path/file.txt");
+        /// string path = Utility.Filesystem.concatenatedPathWithFile(@"path/file.txt");
         ///
         ///</code>
         /// <returns>A string of the current path and the filename</returns>
