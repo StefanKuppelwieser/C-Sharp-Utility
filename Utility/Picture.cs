@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
@@ -27,7 +28,7 @@ namespace Utility
         ///</code>
         /// <exception cref="System.ArgumentNullException">Thrown when a exception if image and/or size are null.</exception>
         /// <returns>It returns the same image with the new size</returns>
-        public static Image ResizeImage(Image image, Size size, bool preserveAspectRatio = true)
+        public static Image ResizeImage(Image image, System.Drawing.Size size, bool preserveAspectRatio = true)
         {
             if (size == null)
             {
