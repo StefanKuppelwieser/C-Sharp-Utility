@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 
 namespace Utility
 {
@@ -41,16 +44,16 @@ namespace Utility
             {
                 int originalWidth = image.Width;
                 int originalHeight = image.Height;
-                float percentWidth = (float)size.Width / (float)originalWidth;
                 float percentHeight = (float)size.Height / (float)originalHeight;
+                float percentWidth = (float)size.Width / (float)originalWidth;
                 float percent = percentHeight < percentWidth ? percentHeight : percentWidth;
                 newWidth = (int)(originalWidth * percent);
                 newHeight = (int)(originalHeight * percent);
             }
             else
             {
-                newWidth = size.Width;
                 newHeight = size.Height;
+                newWidth = size.Width;
             }
             Image newImage = new Bitmap(newWidth, newHeight);
             using (Graphics graphicsHandle = Graphics.FromImage(newImage))
@@ -77,6 +80,45 @@ namespace Utility
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+        /// <summary>
+        /// Convects an image of type BitmapImage to type Bitmap
+        /// </summary>
+        /// <param name="bitmapImage">Contains the image of type BitmapImage</param>
+        /// <code>
+        /// 
+        /// Utility.Picture.convertBitmapImageToImage(bitmapImage);
+        ///
+        ///</code>
+        /// <returns>Returns the converted image of type Bitmap</returns>
+        public static Bitmap convertBitmapImageToImage(BitmapImage bitmapImage)
+        {
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                return new Bitmap(bitmap);
+            }
+        }
+
+        /// <summary>
+        /// Convects an image of type Bitmap to type BitmapImage
+        /// </summary>
+        /// <param name="bitmap">Contains the image of type Bitmap</param>
+        /// <code>
+        /// 
+        /// Utility.Picture.cvonertBitmapImageToBitmap(bitmap);
+        ///
+        ///</code>
+        /// <returns>Returns the converted image of type cvonertBitmapImageToBitmap</returns>
+        private static BitmapImage cvonertBitmapImageToBitmap(Bitmap bitmap)
+        {
+            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            return (BitmapImage)bitmapSource;
         }
     }
 }
