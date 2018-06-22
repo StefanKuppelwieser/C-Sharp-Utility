@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 namespace Utility
 {
     /// <summary>
-    /// The class contains utility functions for pictures
+    /// The class contains all helper methods that have to do with images. It also includes helper methods for the EmguCV framework.
     /// </summary>
     public static class Picture
     {
