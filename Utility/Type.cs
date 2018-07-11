@@ -13,13 +13,13 @@ namespace Utility
     {
 
         /// <summary>
-        /// It converts a number of type String to type Int. If the String is empty or an error ocurred it  will return the value '-1'.
+        /// It converts a number of type String to type Int. If the String is empty or an error ocurred it will return the value '0'.
         /// </summary>
         /// <param name="numberAsString">A number of type String.</param>
         /// <returns>A number of type Int.</returns>
         public static int ConvertStringToInt(String numberAsString)
         {
-            int number = -1;
+            int number = 0;
 
             if (isStringEmpty(numberAsString))
             {
@@ -41,6 +41,40 @@ namespace Utility
 
             return number;
         }
+        
+        
+        /// <summary>
+        /// It converts a number of type String to type Double. If the String is empty or an error ocurred it will return the value ''.
+        /// </summary>
+        /// <param name="numberAsString">A number of type String.</param>
+        /// <returns>A number of type Double.</returns>
+        public static double ConvertStringToDouble(String doubleAsString)
+        {
+            double number = 0.0;
+
+            if (isStringEmpty(doubleAsString))
+            {
+                return number;
+            }
+
+            try
+            {
+                // Replace
+                doubleAsString = doubleAsString.Replace(".", ",");
+                // Convert
+                number = Double.Parse(doubleAsString);
+            }
+            catch (OverflowException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return number;
+        } 
 
         /// <summary>
         /// It checks to see if the string is empty or not. If it is true will be given back.
