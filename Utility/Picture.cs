@@ -13,7 +13,6 @@ namespace Utility
     /// </summary>
     public static class Picture
     {
-
         /// <summary>
         /// The method resizes an image of type Image and returns the image. Specify the height and width of the image. By default, the aspect ratio of an image is maintained.
         /// </summary>
@@ -130,6 +129,47 @@ namespace Utility
 
                 return bitmapimage;
             }
+        }
+        
+        /// <summary>
+        /// Method saves a bitmap image as a JPEG
+        /// </summary>
+        /// <param name="path">Path to which the image should be saved</param>
+        /// <param name="img">The bitmap image to be saved</param>
+        /// <param name="quality">The quality in which it should be stored. Default to 100%</param>
+        public static void SaveJpeg(string path, Bitmap img, long quality = 100)
+        {
+            // Encoder parameter for image quality
+
+            EncoderParameter qualityParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+
+            // Jpeg image codec
+            ImageCodecInfo jpegCodec = EncoderInfo("image/jpeg");
+
+            if (jpegCodec == null)
+                return;
+
+            EncoderParameters encoderParams = new EncoderParameters(1);
+            encoderParams.Param[0] = qualityParam;
+
+            img.Save(path, jpegCodec, encoderParams);
+        }
+
+        /// <summary>
+        /// Specifies the encoding. Used to convert an image to a type.
+        /// </summary>
+        /// <param name="mimeType">Contains the type of the encoding</param>
+        /// <returns></returns>
+        private static ImageCodecInfo EncoderInfo(string mimeType)
+        {
+            // Get image codecs for all image formats
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+
+            // Find the correct image codec
+            for (int i = 0; i < codecs.Length; i++)
+                if (codecs[i].MimeType == mimeType)
+                    return codecs[i];
+            return null;
         }
     }
 }
