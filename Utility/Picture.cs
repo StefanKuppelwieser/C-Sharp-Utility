@@ -1,10 +1,14 @@
-﻿using System;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+
 
 namespace Utility
 {
@@ -13,6 +17,35 @@ namespace Utility
     /// </summary>
     public static class Picture
     {
+        /// <summary>
+        /// Delete a GDI object: Refere to http://www.emgu.com/wiki/index.php/WPF_in_CSharp
+        /// </summary>
+        /// <param name="o">The poniter to the GDI object to be deleted</param>
+        /// <returns></returns>
+        [DllImport("gdi32")]
+        private static extern int DeleteObject(IntPtr o);
+
+        /// <summary>
+        /// Converts a picture from type bitmap to bitmapImage
+        /// </summary>
+        /// <param name="bitmap">Contains the image of the bitmap type</param>
+        /// <returns>Returns an image of type BitmapImage</returns>
+        public static BitmapImage ConvertBitmapToBitmapImage(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
+        }
+        
         /// <summary>
         /// The method resizes an image of type Image and returns the image. Specify the height and width of the image. By default, the aspect ratio of an image is maintained.
         /// </summary>
@@ -170,6 +203,50 @@ namespace Utility
                 if (codecs[i].MimeType == mimeType)
                     return codecs[i];
             return null;
+        }
+        
+        /// <summary>
+        /// Calculate the proportion of an image with a fix ratio.
+        /// The Ratio can calculate with original height / original width
+        /// The function for the proportion calculation is proportion (original height / original width) x new width = new height
+        /// </summary>
+        /// <param name="ratio">Contains the ratio for the calucation</param>
+        /// <param name="height">Contains the target size of the new image</param>
+        /// <returns></returns>
+        public static System.Windows.Point ScaleImageByHeight(double ratio , int height)
+        {
+            double newWidth = ratio * height;
+
+            return new System.Windows.Point(newWidth, height);
+        }
+        
+        /// <summary>
+        /// Convert a BitmapSource mmage to Bitmap
+        /// </summary>
+        /// <param name="srs">Contains the BitmapSource image</param>
+        /// <returns>Return a image of type Bitmap</returns>
+        public static System.Drawing.Bitmap BitmapSourceToBitmap(BitmapSource bitmapSource)
+        {
+            int width = bitmapSource.PixelWidth;
+            int height = bitmapSource.PixelHeight;
+            int stride = width * ((bitmapSource.Format.BitsPerPixel + 7) / 8);
+            IntPtr ptr = IntPtr.Zero;
+            try
+            {
+                ptr = Marshal.AllocHGlobal(height * stride);
+                bitmapSource.CopyPixels(new Int32Rect(0, 0, width, height), ptr, height * stride, stride);
+                using (var btm = new System.Drawing.Bitmap(width, height, stride, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, ptr))
+                {
+                    // Clone the bitmap so that we can dispose it and
+                    // release the unmanaged memory at ptr
+                    return new System.Drawing.Bitmap(btm);
+                }
+            }
+            finally
+            {
+                if (ptr != IntPtr.Zero)
+                    Marshal.FreeHGlobal(ptr);
+            }
         }
     }
 }
