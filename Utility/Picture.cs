@@ -27,27 +27,6 @@ namespace Utility
         private static extern int DeleteObject(IntPtr o);
 
         /// <summary>
-        /// Converts a picture from type bitmap to bitmapImage
-        /// </summary>
-        /// <param name="bitmap">Contains the image of the bitmap type</param>
-        /// <returns>Returns an image of type BitmapImage</returns>
-        public static BitmapImage ConvertBitmapToBitmapImage(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-
-                return bitmapimage;
-            }
-        }
-        
-        /// <summary>
         /// The method resizes an image of type Image and returns the image. Specify the height and width of the image. By default, the aspect ratio of an image is maintained.
         /// </summary>
         /// <param name="image">Contains the image</param>
@@ -126,7 +105,7 @@ namespace Utility
         ///
         ///</code>
         /// <returns>Returns the converted image of type Bitmap</returns>
-        public static Bitmap convertBitmapImageToImage(BitmapImage bitmapImage)
+        public static Bitmap ConvertBitmapImageToImage(BitmapImage bitmapImage)
         {
             using (MemoryStream outStream = new MemoryStream())
             {
@@ -164,7 +143,7 @@ namespace Utility
                 return bitmapimage;
             }
         }
-        
+
         /// <summary>
         /// Method saves a bitmap image as a JPEG
         /// </summary>
