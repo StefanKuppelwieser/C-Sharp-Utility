@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,5 +28,20 @@ namespace Utility
             return sqlFormattedDate;
         }
 
+        /// <summary>
+        /// Converts a date into the datetime typ
+        /// </summary>
+        /// <param name="dd">Describes the day</param>
+        /// <param name="mm">Describes the month</param>
+        /// <param name="yyyy">Describes the year</param>
+        /// <returns>Return the date in datetime format</returns>
+        public static DateTime ConvertDateToDatetime(string dd, string mm, string yyyy)
+        {
+            DateTime dt;
+
+            DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt);
+
+            return dt;
+        }
     }
 }
