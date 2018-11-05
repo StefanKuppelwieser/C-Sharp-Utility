@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+Utility/vcruntime140.dll
+Utility/opencv_ffmpeg341_64.dll
+Utility/msvcp140.dll
+Utility/cvextern.lib
+Utility/concrt140.dll
+Utility/cvextern.dll
