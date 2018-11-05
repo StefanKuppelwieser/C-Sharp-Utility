@@ -16,6 +16,7 @@ namespace Utility
         /// It converts a number of type String to type Int. If the String is empty or an error ocurred it will return the value '0'.
         /// </summary>
         /// <param name="numberAsString">A number of type String.</param>
+        /// <param name="numberAsString">A number of type String.</param>
         /// <returns>A number of type Int.</returns>
         public static int ConvertStringToInt(String numberAsString)
         {
