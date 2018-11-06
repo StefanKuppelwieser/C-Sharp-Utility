@@ -93,5 +93,19 @@ namespace Utility
             }
         }
 
+        /// <summary>
+        /// Convert a point of the data type. System.Windows.Point to System.Drawing.Point
+        /// </summary>
+        /// <param name="point">Contains the coordinate of type System.Windows.Point</param>
+        /// <returns>Returns a point of the System.Drawing.Point data type</returns>
+        public static System.Drawing.Point ConvertWindowsPointToDrawingPoint(System.Windows.Point point)
+        {
+            System.Drawing.Point newPoint = new System.Drawing.Point();
+
+            newPoint.X = Convert.ToInt32(point.X);
+            newPoint.Y = Convert.ToInt32(point.Y);
+
+            return newPoint;
+        }
     }
 }
