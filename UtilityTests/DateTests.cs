@@ -42,5 +42,13 @@ namespace Utility.Tests
             Assert.AreEqual(dateTime, Date.ConvertDateToDatetime(24, 10, 1991));
             Assert.AreNotEqual(dateTime, Date.ConvertDateToDatetime("24", "10", "2018"));
         }
+
+        [TestMethod()]
+        public void ConvertStringToDatetimeTest()
+        {
+            string date = "2018-11-06 22:10:03.304";
+
+            Assert.AreEqual("06.11.2018 22:10:03", Date.ConvertStringToDatetime(date).ToString());
+        }
     }
 }
