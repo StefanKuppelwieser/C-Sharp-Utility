@@ -10,7 +10,7 @@ namespace Utility
     /// <summary>
     /// The class contains various conversions to the date and date data types
     /// </summary>
-    class Date
+    public class Date
     {
 
         /// <summary>
@@ -36,6 +36,22 @@ namespace Utility
         /// <param name="yyyy">Describes the year</param>
         /// <returns>Return the date in datetime format</returns>
         public static DateTime ConvertDateToDatetime(string dd, string mm, string yyyy)
+        {
+            DateTime dt;
+
+            DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt);
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Converts a date into the datetime typ
+        /// </summary>
+        /// <param name="dd">Describes the day</param>
+        /// <param name="mm">Describes the month</param>
+        /// <param name="yyyy">Describes the year</param>
+        /// <returns>Return the date in datetime format</returns>
+        public static DateTime ConvertDateToDatetime(int dd, int mm, int yyyy)
         {
             DateTime dt;
 
