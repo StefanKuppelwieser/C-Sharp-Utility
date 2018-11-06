@@ -9,7 +9,7 @@ namespace Utility
     /// <summary>
     /// The Type class contains methods that deal with the common common data types. It will mainly contain conversions and reviews.
     /// </summary>
-    class Type
+    public class Type
     {
 
         /// <summary>
@@ -82,12 +82,13 @@ namespace Utility
         /// </summary>
         /// <param name="value">An string.</param>
         /// <returns>If the string is empty it will return true otherwise false.</returns>
-        public static Boolean isStringEmpty(String value)
+        public static Boolean IsStringEmpty(String value)
         {
-            if(value.Length == 0 || value == String.Empty || value == null)
+            if (string.IsNullOrWhiteSpace(value) || value.Length == 0 || value == String.Empty)
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
