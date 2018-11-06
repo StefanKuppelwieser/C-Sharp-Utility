@@ -37,18 +37,9 @@ namespace Utility
         /// <returns>Return the date in datetime format</returns>
         public static DateTime ConvertDateToDatetime(string dd, string mm, string yyyy)
         {
-            DateTime dt = default(DateTime);
+            Boolean zustand = DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt);
 
-            try
-            {
-                DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-
-            return dt;
+            return (zustand == true ? dt : default(DateTime));
         }
 
         /// <summary>
@@ -60,18 +51,9 @@ namespace Utility
         /// <returns>Return the date in datetime format</returns>
         public static DateTime ConvertDateToDatetime(int dd, int mm, int yyyy)
         {
-            DateTime dt = default(DateTime);
+            Boolean zustand = DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt);
 
-            try
-            {
-                DateTime.TryParseExact(dd + "/" + mm + "/" + yyyy, "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-
-            return dt;
+            return (zustand == true ? dt : default(DateTime));
         }
 
         /// <summary>
