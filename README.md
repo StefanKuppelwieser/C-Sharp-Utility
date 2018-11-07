@@ -20,6 +20,10 @@ You only have to integrate the C# project into your development environment and 
 * [Visual Studio Community 2017](https://www.visualstudio.com/de/downloads/) - Development environment
 * [.NET Framework 4.6.1](https://www.microsoft.com/de-de/download/details.aspx?id=49982) - Microsoft Framework
 
+## Dependencies
+
+* [EmguCV](http://www.emgu.com/wiki/index.php/Main_Page) - [Integrate EmguCV into Visual Studio (german)](https://kuppelwieser.net/index.php/technik/15-bildverarbeitung/32-emgucv-in-visual-studio-einbinden)
+
 ## Authors
 
 * **Stefan Kuppelwieser** - [Github](https://github.com/StefanKuppelwieser) - [Website](https://wwww.kuppelwieser.net)
