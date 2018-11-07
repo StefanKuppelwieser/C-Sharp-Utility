@@ -22,7 +22,7 @@ namespace Utility
         {
             int number = 0;
 
-            if (isStringEmpty(numberAsString))
+            if (IsStringEmpty(numberAsString))
             {
                 return number;
             }
@@ -53,7 +53,7 @@ namespace Utility
         {
             double number = 0.0;
 
-            if (isStringEmpty(doubleAsString))
+            if (IsStringEmpty(doubleAsString))
             {
                 return number;
             }
