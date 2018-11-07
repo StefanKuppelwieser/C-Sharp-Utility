@@ -26,5 +26,41 @@ namespace Utility
         ///</code>
         /// <returns>A string of the current path and the filename</returns>
         public static string ConcatenatedPathWithFile(string fileName) => Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
+        /// <summary>
+        /// Checks if the file is locked by another process
+        /// </summary>
+        /// <code>
+        /// 
+        /// Boolean fileLocked = IsFileLocked(new Fileinfo("path\file.txt");
+        ///
+        ///</code>
+        /// <param name="file">Contains the path to the file</param>
+        /// <returns>Returns the status of whether the file is locked or not</returns>
+        public static bool IsFileLocked(FileInfo file)
+        {
+            FileStream stream = null;
+
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+
+            //file is not locked
+            return false;
+        }
     }
 }
