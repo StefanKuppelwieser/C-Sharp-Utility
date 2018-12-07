@@ -228,5 +228,29 @@ namespace Utility
                     Marshal.FreeHGlobal(ptr);
             }
         }
+        
+        /// <summary>
+        /// Proportioning an existing image into a given maximum height or width
+        /// </summary>
+        /// <param name="image">Contains the image</param>
+        /// <param name="maxWidth">Contains the max width of the new image</param>
+        /// <param name="maxHeight">Contains the max height of the new image</param>
+        /// <returns>Returns the new proportioning image</returns>
+        public static System.Drawing.Image ScaleImage(System.Drawing.Image image, int maxWidth, int maxHeight)
+        {
+            double ratioX = Convert.ToDouble(maxWidth) / image.Width;
+            double ratioY = Convert.ToDouble(maxHeight) / image.Height;
+            var ratio = Math.Min(ratioX, ratioY);
+
+            int newWidth = Convert.ToInt32(image.Width * ratio);
+            int newHeight = Convert.ToInt32(image.Height * ratio);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+
+            using (var graphics = Graphics.FromImage(newImage))
+                graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+
+            return newImage;
+        }
     }
 }
