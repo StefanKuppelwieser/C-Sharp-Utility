@@ -110,13 +110,14 @@ namespace Utility
         }
 
         /// <summary>
-        /// Checks if the entered number is an even number
+        /// Checks if the entered number is dividible number 
         /// </summary>
-        /// <param name="number"> Contains the number to be checked </ param>
-        /// <returns>Returns true if the number is even </ returns>
-        public static bool isModulo(int number)
+        /// <param name="denominator">Contains the number to be divided</param>
+        /// <param name="numerator">Contains the number to be checked </param>
+        /// <returns>Returns true if the number is even </returns>
+        public static bool IsDividible(int denominator, int numerator)
         {
-            return number % 2 == 0;
+            return (denominator % numerator) == 0;
         }
     }
 }
