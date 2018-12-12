@@ -108,5 +108,15 @@ namespace Utility
 
             return newPoint;
         }
+
+        /// <summary>
+        /// Checks if the entered number is an even number
+        /// </summary>
+        /// <param name="number"> Contains the number to be checked </ param>
+        /// <returns>Returns true if the number is even </ returns>
+        private static bool isModulo(int number)
+        {
+            return number % 2 == 0;
+        }
     }
 }
