@@ -114,7 +114,7 @@ namespace Utility
         /// </summary>
         /// <param name="number"> Contains the number to be checked </ param>
         /// <returns>Returns true if the number is even </ returns>
-        private static bool isModulo(int number)
+        public static bool isModulo(int number)
         {
             return number % 2 == 0;
         }
